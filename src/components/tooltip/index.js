@@ -9,7 +9,7 @@ import {
 
 const TooltipComponent = props => {
   const [displayTooltip, setDisplayTooltip] = useState(false);
-  const { children, position, inside, trigger } = props;
+  const { position, inside, trigger } = props;
 
   const hideTooltip = () => {
     setDisplayTooltip(false);
