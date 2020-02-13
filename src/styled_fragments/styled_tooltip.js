@@ -23,11 +23,22 @@ export const TooltipBubble = styled.div`
 `;
 
 export const ThePositionGoesTo = styled.div`
-  bottom: ${props => (props.position === typePosition.top ? "100%" : "0")};
+  &.tooltip-bubble {
+    min-width: 120px;
+    max-width: 210px;
+    position: absolute;
+    z-index: 10;
+    &::after {
+      content: "";
+      position: absolute;
+    }
+  }
+
+  bottom: ${props => (props.position === typePosition.top ? "120%" : "unset")};
   top: ${props => {
     switch (props.position) {
       case typePosition.bottom:
-        return "100%";
+        return "120%";
       case typePosition.left:
         return "50%";
       case typePosition.right:
@@ -39,7 +50,7 @@ export const ThePositionGoesTo = styled.div`
   left: ${props => {
     switch (props.position) {
       case typePosition.right:
-        return "100%";
+        return "120%";
       case typePosition.top:
         return "50%";
       case typePosition.bottom:
@@ -48,7 +59,7 @@ export const ThePositionGoesTo = styled.div`
         return "unset";
     }
   }};
-  right: ${props => (props.position === typePosition.left ? "100%" : "unset")};
+  right: ${props => (props.position === typePosition.left ? "120%" : "unset")};
   transform: ${props => {
     switch (props.position) {
       case typePosition.top:
@@ -60,19 +71,59 @@ export const ThePositionGoesTo = styled.div`
       case typePosition.left:
         return "translateY(-50%)";
       default:
-        return "";
+        return "unset";
     }
   }};
 
-  &::after {
-    border-right: 9px solid rgba(0, 0, 0, 0.7);
-    border-top: 9px solid transparent;
-    border-bottom: 9px solid transparent;
-    bottom: ${props => (props.position === typePosition.top ? "0" : "unset")};
+  ::after {
+    border-left: ${props => {
+      switch (props.position) {
+        case typePosition.top:
+        case typePosition.bottom:
+          return "9px solid transparent";
+        case typePosition.left:
+          return "9px solid rgba(0, 0, 0, 0.7)";
+        default:
+          return "unset";
+      }
+    }};
+    border-right: ${props => {
+      switch (props.position) {
+        case typePosition.top:
+        case typePosition.bottom:
+          return "9px solid transparent";
+        case typePosition.right:
+          return "9px solid rgba(0, 0, 0, 0.7)";
+        default:
+          return "unset";
+      }
+    }};
+    border-top: ${props => {
+      switch (props.position) {
+        case typePosition.top:
+          return "9px solid rgba(0, 0, 0, 0.7)";
+        case typePosition.right:
+        case typePosition.left:
+          return "9px solid transparent";
+        default:
+          return "unset";
+      }
+    }};
+    border-bottom: ${props => {
+      switch (props.position) {
+        case typePosition.bottom:
+          return "9px solid rgba(0, 0, 0, 0.7)";
+
+        case typePosition.left:
+        case typePosition.right:
+          return "9px solid transparent";
+      }
+    }};
+    bottom: ${props => (props.position === typePosition.top ? "-8%" : "unset")};
     left: ${props => {
       switch (props.position) {
         case typePosition.right:
-          return "0";
+          return "-8%";
         case typePosition.top:
           return "50%";
         case typePosition.bottom:
@@ -81,11 +132,11 @@ export const ThePositionGoesTo = styled.div`
           return "unset";
       }
     }};
-    right: ${props => (props.position === typePosition.left ? "0" : "unset")};
+    right: ${props => (props.position === typePosition.left ? "-8%" : "unset")};
     top: ${props => {
       switch (props.position) {
         case typePosition.bottom:
-          return "0";
+          return "-8%";
         case typePosition.left:
           return "50%";
         case typePosition.right:
@@ -104,6 +155,8 @@ export const ThePositionGoesTo = styled.div`
           return "translateY(-50%)";
         case typePosition.left:
           return "translateY(-50%)";
+        default:
+          return "unset";
       }
     }};
   }

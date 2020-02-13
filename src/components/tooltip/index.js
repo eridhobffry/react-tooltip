@@ -22,11 +22,9 @@ const TooltipComponent = props => {
   return (
     <TooltipSpan onMouseLeave={hideTooltip}>
       {displayTooltip && (
-        <TooltipBubble>
-          <ThePositionGoesTo position={position}>
-            <TooltipMessage>{inside}</TooltipMessage>
-          </ThePositionGoesTo>
-        </TooltipBubble>
+        <ThePositionGoesTo position={position} className="tooltip-bubble">
+          <TooltipMessage>{inside}</TooltipMessage>
+        </ThePositionGoesTo>
       )}
       <TooltipTrigger onMouseOver={showTooltip}>{trigger}</TooltipTrigger>
     </TooltipSpan>
